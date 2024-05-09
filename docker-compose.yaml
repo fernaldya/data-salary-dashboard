@@ -1,0 +1,18 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: salary_DB
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-script.sql:/docker-entrypoint-initdb.d/init-script.sql
+      - ./data:/psql_data
+    ports:
+      -"5434:5432"
+
+volumes:
+  postgres_data:
