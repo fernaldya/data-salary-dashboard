@@ -1,4 +1,3 @@
-version: '3'
 services:
   source_db:
     image: postgres:latest
