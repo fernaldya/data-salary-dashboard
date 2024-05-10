@@ -1,18 +1,34 @@
 version: '3'
 services:
-  postgres:
+  source_db:
     image: postgres:latest
-    container_name: salary_DB
+    container_name: source_DB
     environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${SOURCE_DB}
+      - POSTGRES_USER=${SOURCE_USER}
+      - POSTGRES_PASSWORD=${SOURCE_PASSWORD}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - source_data:/var/lib/postgresql/data
       - ./scripts/init-script.sql:/docker-entrypoint-initdb.d/init-script.sql
+      - ./scripts/inject_data.sh:/scripts/inject_data.sh
       - ./data:/psql_data
     ports:
-      -"5434:5432"
+      - "5434:5432"
+  
+  target_db:
+    image: postgres:latest
+    container_name: target_DB
+    environment: 
+      - POSTGRES_DB=${TARGET_DB}
+      - POSTGRES_USER=${TARGET_USER}
+      - POSTGRES_PASSWORD=${TARGET_PASSWORD}
+    volumes:
+      - target_data:/var/lib/postgresql/data
+      - ./scripts/target_table.sql:/scripts/create_table.sql
+    ports:
+      - "5433:5432"
 
 volumes:
-  postgres_data:
+  source_data:
+  target_data:
+  
