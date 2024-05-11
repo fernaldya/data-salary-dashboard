@@ -23,11 +23,23 @@ services:
       - POSTGRES_PASSWORD=${TARGET_PASSWORD}
     volumes:
       - target_data:/var/lib/postgresql/data
-      - ./scripts/target_table.sql:/scripts/create_table.sql
+      - ./scripts/create_target_table.sql:/scripts/create_target_table.sql
     ports:
       - "5433:5432"
+
+  pipeline:
+    image: python:3.12-slim
+    container_name: pipeline
+    environment:
+      - POSTGRES_DB=${TARGET_DB}
+      - POSTGRES_USER=${TARGET_USER}
+      - POSTGRES_PASSWORD=${TARGET_PASSWORD}
+    volumes:
+      - ./etl_scripts:/etl_scripts
+      - ./frontend:/frontend
+    ports:
+      - "81:80"
 
 volumes:
   source_data:
   target_data:
-  
