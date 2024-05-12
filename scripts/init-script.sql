@@ -3,7 +3,6 @@ CREATE SCHEMA IF NOT EXISTS salary_data;
 
 -- CREATE TABLE
 CREATE TABLE IF NOT EXISTS salary_data.salaries (
-    id SERIAL PRIMARY KEY, 
     work_year TEXT,
     experience_level TEXT,
     employment_type TEXT,
