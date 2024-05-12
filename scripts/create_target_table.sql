@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS salary_data.staging_one (
     employee_residence TEXT,
     remote_ratio TEXT,
     company_location TEXT,
-    company_size TEXT
+    company_size TEXT,
+    ts_processed TEXT
 );
 
 -- CREATE STAGING TABLE 2
@@ -30,5 +31,6 @@ CREATE TABLE IF NOT EXISTS salary_data.staging_two (
     employee_residence VARCHAR(3),
     remote_ratio SMALLINT,
     company_location VARCHAR(3),
-    company_size VARCHAR(3)
+    company_size VARCHAR(3),
+    ts_processed TIMESTAMP
 );
