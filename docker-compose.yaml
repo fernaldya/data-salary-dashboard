@@ -13,11 +13,11 @@ services:
       - ./data:/psql_data
     ports:
       - "5434:5432"
-  
+
   target_db:
     image: postgres:latest
     container_name: target_DB
-    environment: 
+    environment:
       - POSTGRES_DB=${TARGET_DB}
       - POSTGRES_USER=${TARGET_USER}
       - POSTGRES_PASSWORD=${TARGET_PASSWORD}
@@ -27,8 +27,8 @@ services:
     ports:
       - "5433:5432"
 
-  pipeline:
-    image: python:3.12-slim
+  frontend:
+    build: ./frontend/.
     container_name: pipeline
     environment:
       - POSTGRES_DB=${TARGET_DB}
@@ -38,7 +38,7 @@ services:
       - ./etl_scripts:/etl_scripts
       - ./frontend:/frontend
     ports:
-      - "81:80"
+      - "8501:8501"
 
 volumes:
   source_data:
