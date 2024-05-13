@@ -36,13 +36,13 @@ services:
       - TARGET_DB_USER=${TARGET_USER}
       - TARGET_DB_PASSWORD=${TARGET_PASSWORD}
     volumes:
-      - ./src_backend:/app/src
+      - ./backend/src_backend:/app/src
 
   frontend:
     build: ./frontend/.
     container_name: pipeline
     volumes:
-      - ./src_frontend:/app/src
+      - ./frontend:/app
     ports:
       - "8501:8501"
 
