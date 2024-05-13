@@ -27,16 +27,22 @@ services:
     ports:
       - "5433:5432"
 
+  pipeline:
+    image: apache/spark-py:v3.4.0
+    container_name: spark_container
+    environment:
+      - SOURCE_DB_USER=${SOURCE_USER}
+      - SOURCE_DB_PASS=${SOURCE_PASSWORD}
+      - TARGET_DB_USER=${TARGET_USER}
+      - TARGET_DB_PASSWORD=${TARGET_PASSWORD}
+    volumes:
+      - ./src_backend:/app/src
+
   frontend:
     build: ./frontend/.
     container_name: pipeline
-    environment:
-      - POSTGRES_DB=${TARGET_DB}
-      - POSTGRES_USER=${TARGET_USER}
-      - POSTGRES_PASSWORD=${TARGET_PASSWORD}
     volumes:
-      - ./etl_scripts:/etl_scripts
-      - ./frontend:/frontend
+      - ./src_frontend:/app/src
     ports:
       - "8501:8501"
 
