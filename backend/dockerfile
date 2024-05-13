@@ -1,0 +1,11 @@
+FROM apache/spark-py:v.3.4.0
+
+WORKDIR /app
+
+COPY requirements.txt /app
+
+RUN apt update &&\
+    apt install -y build-essential gcc &&\
+    pip install --no-cache-dir -f requirements.txt
+
+ENTRYPOINT [ "sleep", "3600" ]

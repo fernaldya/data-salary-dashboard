@@ -1,0 +1,12 @@
+{
+    "target_database": {
+        "host": "localhost",
+        "port": 5433,
+        "database": "salary",
+        "user": "postgres",
+        "password": "postgres",
+        "schema": "salary_data",
+        "staging_one_table": "staging_one",
+        "staging_two_table": "staging_two"
+    }
+}

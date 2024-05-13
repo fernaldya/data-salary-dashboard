@@ -1,0 +1,12 @@
+{
+    "source_database": {
+        "host": "localhost",
+        "port": 5434,
+        "database": "salary",
+        "user": "postgres",
+        "password": "postgres",
+        "schema": "salary_data",
+        "table": "salaries"
+    }
+}
+  
