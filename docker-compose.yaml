@@ -28,7 +28,7 @@ services:
       - "5433:5432"
 
   pipeline:
-    image: apache/spark-py:v3.4.0
+    build: ./backend/.
     container_name: spark_container
     environment:
       - SOURCE_DB_USER=${SOURCE_USER}
