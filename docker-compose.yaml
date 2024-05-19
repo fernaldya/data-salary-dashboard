@@ -34,13 +34,13 @@ services:
       - SOURCE_DB_USER=${SOURCE_USER}
       - SOURCE_DB_PASS=${SOURCE_PASSWORD}
       - TARGET_DB_USER=${TARGET_USER}
-      - TARGET_DB_PASSWORD=${TARGET_PASSWORD}
+      - TARGET_DB_PASS=${TARGET_PASSWORD}
     volumes:
       - ./backend/src_backend:/app/src
 
   frontend:
     build: ./frontend/.
-    container_name: pipeline
+    container_name: frontend
     volumes:
       - ./frontend:/app
     ports:
