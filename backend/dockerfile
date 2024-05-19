@@ -1,6 +1,17 @@
 FROM apache/spark-py:v3.4.0
 
+# Set environment variables
+ENV POSTGRES_DRIVER_VERSION=42.2.5
+
 USER root
+
+# Install wget to download the PostgreSQL JDBC driver
+RUN apt-get update && apt-get install -y wget
+
+
+# Download the PostgreSQL JDBC driver
+RUN wget -O /opt/spark/jars/postgresql-${POSTGRES_DRIVER_VERSION}.jar \
+    https://jdbc.postgresql.org/download/postgresql-${POSTGRES_DRIVER_VERSION}.jar
 
 WORKDIR /app
 
