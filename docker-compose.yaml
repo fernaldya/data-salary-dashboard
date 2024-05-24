@@ -1,5 +1,5 @@
 networks:
-  container_links:
+  pipeline_network:
     driver: bridge
 
 services:
@@ -17,6 +17,8 @@ services:
       - ./data:/psql_data
     ports:
       - "5434:5432"
+    networks:
+      - pipeline_network
 
   target_db:
     image: postgres:latest
@@ -30,6 +32,8 @@ services:
       - ./scripts/create_target_table.sql:/scripts/create_target_table.sql
     ports:
       - "5433:5432"
+    networks:
+      - pipeline_network
 
   pipeline:
     build: ./backend/.
@@ -41,6 +45,8 @@ services:
       - TARGET_DB_PASS=${TARGET_PASSWORD}
     volumes:
       - ./backend/src_backend:/app/src
+    networks:
+      - pipeline_network
 
   frontend:
     build: ./frontend/.
