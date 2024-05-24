@@ -41,6 +41,7 @@ def main() -> None:
     spark = SparkSession.builder \
             .appName('Pipeline') \
             .config('spark.jars', '/opt/spark/jars/postgresql-42.2.5.jar') \
+            .config('spark.sql.legacy.timeParserPolicy', 'LEGACY') \
             .getOrCreate()
             
     logger.info('Spark Session created')
@@ -49,7 +50,7 @@ def main() -> None:
         # Fetch data from source table
         source_df = fetch_data(spark=spark, jdbc_url=src_jdbc_url, connection_properties=src_creds,\
                             schema=src_conn['schema'], table=src_conn['table'])
-
+        
         # Move data to staging one table
         staging_one(source_df=source_df, jdbc_url=tgt_jdbc_url, connection_properties=tgt_creds,\
                     schema=tgt_conn['schema'], table=tgt_conn['staging_one_table'])

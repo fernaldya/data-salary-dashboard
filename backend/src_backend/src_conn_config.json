@@ -1,7 +1,7 @@
 {
     "source_database": {
         "host": "source_db",
-        "port": 5434,
+        "port": 5432,
         "database": "salary",
         "user": "postgres",
         "password": "postgres",

@@ -1,7 +1,7 @@
 {
     "target_database": {
         "host": "target_db",
-        "port": 5433,
+        "port": 5432,
         "database": "salary",
         "user": "postgres",
         "password": "postgres",
